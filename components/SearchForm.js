@@ -19,8 +19,11 @@ import {
   ModalTitle,
   SlideAnimation,
 } from "react-native-modals";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const SearchForm = () => {
+  const route = useRoute();
+  const navigator = useNavigation();
   const [room, setRoom] = useState(1);
   const [adult, setAdult] = useState(2);
   const [child, setChild] = useState(0);
@@ -48,6 +51,7 @@ const SearchForm = () => {
     >
       {/* Destination */}
       <Pressable
+        onPress={() => navigator.navigate("Search")}
         style={{
           flexDirection: "row",
           padding: 8,
@@ -60,7 +64,9 @@ const SearchForm = () => {
       >
         <Feather name="search" size={22} color="black" />
         <TextInput
-          placeholder="Enter your destination"
+          placeholder={
+            route?.params ? route.params.input : "Enter your destination"
+          }
           style={{ paddingLeft: 0 }}
         />
       </Pressable>
@@ -127,7 +133,7 @@ const SearchForm = () => {
       >
         <AntDesign name="user" size={22} color="black" />
         <Text style={{ color: "red", fontSize: 14, paddingLeft: 6 }}>
-          {room} room * {adult} Adult {child} 0 childred
+          {room} room * {adult} Adult {child} childred
         </Text>
       </Pressable>
       {/* Search Button */}
