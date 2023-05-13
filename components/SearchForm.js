@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   View,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
@@ -40,6 +41,30 @@ const SearchForm = () => {
       text="Submit"
     />
   );
+  const searchPlaces = (place) => {
+    if (!route?.params || !selectedDate) {
+      Alert.alert("Invalid Details", "Please enter all details", [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Ok",
+          onPress: () => console.log("Ok Pressed"),
+        },
+      ]);
+    }
+    if (route?.params && selectedDate) {
+      navigator.navigate("PlacesScreen", {
+        rooms: room,
+        adults: adult,
+        children: child,
+        selectedDate: selectedDate,
+        place: place,
+      });
+    }
+  };
   return (
     <View
       style={{
@@ -138,6 +163,7 @@ const SearchForm = () => {
       </Pressable>
       {/* Search Button */}
       <Pressable
+        onPress={() => searchPlaces(route?.params.input)}
         style={{
           padding: 8,
           alignItems: "center",

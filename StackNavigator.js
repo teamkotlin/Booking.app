@@ -11,6 +11,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import SearchScreen from "./screens/SearchScreen";
+import PlacesScreen from "./screens/PlacesScreen";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -92,6 +93,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Search"
           component={SearchScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PlacesScreen"
+          component={PlacesScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
